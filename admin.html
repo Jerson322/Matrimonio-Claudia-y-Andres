@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmaciones — Claudia & Andrés</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Jost:wght@400;500;600&display=swap');
+  :root{
+    --bg:#FFFEFA; --surface:#FFFFFF; --surface-2:#FBF3DE;
+    --text:#2A2311; --text-muted:#8A7A4E;
+    --gold:#C9A227; --gold-3:#8A6A16; --gold-ink:#2A2004;
+    --border:rgba(180,140,40,0.28);
+    --ok:#4B7A4B; --bad:#A94B29;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F0D08; --surface:#181307; --surface-2:#221A0B;
+      --text:#F6EFDC; --text-muted:#C4B383;
+      --gold:#E9C158; --gold-3:#E9C158;
+      --border:rgba(233,193,88,0.3);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Jost',sans-serif; padding:24px; }
+  h1{ font-family:'Fraunces',serif; font-size:1.8rem; margin:0 0 6px; }
+  p.sub{ color:var(--text-muted); margin:0 0 24px; }
+  .card{ max-width:960px; margin-inline:auto; }
+  .gate{ max-width:360px; margin:60px auto; text-align:center; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px; }
+  .gate input{ width:100%; font-size:1.05rem; padding:12px 14px; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); margin-bottom:14px; }
+  .gate button, .toolbar button{ font-family:'Jost',sans-serif; font-weight:600; font-size:1rem; padding:12px 22px; border-radius:999px; border:none; background:linear-gradient(120deg,var(--gold-3),var(--gold)); color:var(--gold-ink); cursor:pointer; }
+  .err{ color:var(--bad); font-size:.9rem; margin-top:8px; }
+  table{ width:100%; border-collapse:collapse; background:var(--surface); border-radius:14px; overflow:hidden; box-shadow:0 12px 30px -18px rgba(0,0,0,.25); }
+  th,td{ text-align:left; padding:12px 14px; border-bottom:1px solid var(--border); font-size:.95rem; }
+  th{ background:var(--surface-2); font-weight:600; }
+  tr:last-child td{ border-bottom:none; }
+  .pill{ display:inline-block; padding:3px 10px; border-radius:999px; font-size:.8rem; font-weight:600; }
+  .pill.si{ background:rgba(75,122,75,.15); color:var(--ok); }
+  .pill.no{ background:rgba(169,75,41,.15); color:var(--bad); }
+  .toolbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; gap:12px; flex-wrap:wrap; }
+  .summary{ display:flex; gap:18px; flex-wrap:wrap; margin-bottom:18px; }
+  .stat{ background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:14px 20px; }
+  .stat strong{ display:block; font-family:'Fraunces',serif; font-size:1.6rem; }
+  .stat span{ color:var(--text-muted); font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; }
+  [hidden]{ display:none !important; }
+  .empty{ text-align:center; color:var(--text-muted); padding:40px 0; }
+  @media (max-width:640px){
+    table, thead, tbody, th, td, tr{ display:block; }
+    thead{ display:none; }
+    tr{ background:var(--surface); border-radius:12px; margin-bottom:12px; padding:10px 14px; box-shadow:0 8px 20px -14px rgba(0,0,0,.2); }
+    td{ border:none; padding:6px 0; }
+    td::before{ content:attr(data-label); display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); }
+  }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <h1 style="font-size:1.3rem;">Panel de confirmaciones</h1>
+  <p class="sub">Acceso solo para Claudia y Andrés</p>
+  <input id="pw" type="password" placeholder="Clave de acceso" autocomplete="off">
+  <button id="enterBtn" type="button">Entrar</button>
+  <p class="err" id="gateErr" hidden>Clave incorrecta.</p>
+</div>
+
+<div class="card" id="panel" hidden>
+  <div class="toolbar">
+    <div>
+      <h1>Confirmaciones de asistencia</h1>
+      <p class="sub">Claudia &amp; Andrés · 19 de diciembre de 2026</p>
+    </div>
+    <button id="refreshBtn" type="button">Actualizar</button>
+  </div>
+  <div class="summary" id="summary"></div>
+  <div id="tableWrap"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var gate = document.getElementById('gate');
+  var panel = document.getElementById('panel');
+  var pwInput = document.getElementById('pw');
+  var gateErr = document.getElementById('gateErr');
+  var summary = document.getElementById('summary');
+  var tableWrap = document.getElementById('tableWrap');
+  var key = null;
+
+  function load(){
+    fetch('/api/admin?key=' + encodeURIComponent(key)).then(function(res){
+      if(res.status === 401){ throw new Error('unauthorized'); }
+      if(!res.ok){ throw new Error('server_error'); }
+      return res.json();
+    }).then(function(data){
+      gate.hidden = true;
+      panel.hidden = false;
+      render(data.entries || []);
+    }).catch(function(err){
+      if(err.message === 'unauthorized'){
+        gateErr.hidden = false;
+      } else {
+        tableWrap.innerHTML = '<p class="empty">No se pudo cargar la información. Intenta de nuevo.</p>';
+      }
+    });
+  }
+
+  function render(entries){
+    var total = entries.length;
+    var si = entries.filter(function(e){ return e.attending === 'si'; });
+    var guestCount = si.reduce(function(sum, e){ return sum + (Number(e.guests) || 1); }, 0);
+
+    summary.innerHTML =
+      '<div class="stat"><strong>' + total + '</strong><span>Respuestas</span></div>' +
+      '<div class="stat"><strong>' + si.length + '</strong><span>Confirmados</span></div>' +
+      '<div class="stat"><strong>' + guestCount + '</strong><span>Personas (sí)</span></div>';
+
+    if(!entries.length){
+      tableWrap.innerHTML = '<p class="empty">Todavía no hay confirmaciones.</p>';
+      return;
+    }
+
+    var rows = entries.map(function(e){
+      var date = e.createdAt ? new Date(e.createdAt).toLocaleString('es-CO', { dateStyle:'medium', timeStyle:'short' }) : '';
+      var pillClass = e.attending === 'si' ? 'si' : 'no';
+      var pillText = e.attending === 'si' ? 'Sí asiste' : 'No asiste';
+      return '<tr>' +
+        '<td data-label="Nombre">' + escapeHtml(e.name || '') + '</td>' +
+        '<td data-label="Asistencia"><span class="pill ' + pillClass + '">' + pillText + '</span></td>' +
+        '<td data-label="Personas">' + escapeHtml(String(e.guests || 1)) + '</td>' +
+        '<td data-label="Mensaje">' + escapeHtml(e.message || '—') + '</td>' +
+        '<td data-label="Fecha">' + date + '</td>' +
+      '</tr>';
+    }).join('');
+
+    tableWrap.innerHTML =
+      '<table><thead><tr>' +
+      '<th>Nombre</th><th>Asistencia</th><th>Personas</th><th>Mensaje</th><th>Fecha</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  document.getElementById('enterBtn').addEventListener('click', function(){
+    gateErr.hidden = true;
+    key = pwInput.value.trim();
+    if(!key) return;
+    load();
+  });
+  pwInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ document.getElementById('enterBtn').click(); }
+  });
+  document.getElementById('refreshBtn').addEventListener('click', load);
+})();
+</script>
+</body>
+</html>
