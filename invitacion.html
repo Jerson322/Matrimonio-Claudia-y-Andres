@@ -284,6 +284,7 @@
     border-radius:12px; border:1px solid var(--border); background:var(--bg); color:var(--text);
   }
   .field textarea{ resize:vertical; min-height:90px; }
+  .field-note{ color:var(--gold-3); font-size:.98rem; margin-top:8px; }
   .row-2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
   @media (max-width:520px){ .row-2{grid-template-columns:1fr;} }
 
@@ -534,8 +535,9 @@
       </div>
 
       <div class="field">
-        <label for="rsvpSong">¿Qué canción quieres escuchar en la boda? (opcional)</label>
-        <input id="rsvpSong" name="song" type="text" placeholder="Nombre de la canción">
+        <label for="rsvpSong">Ayúdanos a hacer de nuestra celebración una noche inolvidable. ¿Qué canción te gustaría escuchar o qué dinámica te gustaría que hiciéramos en nuestra boda? (opcional)</label>
+        <textarea id="rsvpSong" name="song" placeholder="Cuéntanos tu idea..."></textarea>
+        <p class="field-note">¡Queremos leer tus ideas y, por qué no, hacerlas realidad! 🎉</p>
       </div>
 
       <button class="btn" id="rsvpSubmit" type="submit">Confirmar asistencia</button>

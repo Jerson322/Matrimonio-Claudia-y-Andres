@@ -25,7 +25,7 @@ module.exports = async function handler(req, res) {
       guests: Math.max(1, Math.min(5, Number(guests) || 1)),
       attendeeNames: clean(attendeeNames, 500),
       question: clean(body.question, 500),
-      song: clean(body.song, 200),
+      song: clean(body.song, 500),
       createdAt: new Date().toISOString(),
     };
 
