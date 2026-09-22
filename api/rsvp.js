@@ -1,4 +1,5 @@
-const { kv } = require('@vercel/kv');
+const { Redis } = require('@upstash/redis');
+const kv = Redis.fromEnv();
 
 function clean(value, max) {
   return typeof value === 'string' ? value.slice(0, max) : '';
