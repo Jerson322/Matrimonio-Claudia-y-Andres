@@ -509,7 +509,7 @@
   <div class="rsvp-card">
     <form id="rsvpForm">
       <div class="field">
-        <label for="rsvpName">Tu nombre completo</label>
+        <label for="rsvpName">Tu nombre completo o nombre de la familia</label>
         <input id="rsvpName" name="name" type="text" required autocomplete="name" placeholder="Escribe tu nombre">
       </div>
 
@@ -522,14 +522,15 @@
       </div>
 
       <div class="field">
-        <label>¿Cuántas personas asisten? *</label>
-        <div class="radio-group" role="radiogroup" aria-label="¿Cuántas personas asisten?">
-          <label class="radio-option"><input type="radio" name="guests" value="1" required> Solo yo</label>
-          <label class="radio-option"><input type="radio" name="guests" value="2"> Yo y 1 persona más</label>
-          <label class="radio-option"><input type="radio" name="guests" value="3"> Yo y 2 personas más</label>
-          <label class="radio-option"><input type="radio" name="guests" value="4"> Yo y 3 personas más</label>
-          <label class="radio-option"><input type="radio" name="guests" value="5"> Yo y 4 personas más</label>
-        </div>
+        <label for="rsvpGuests">¿Cuántas personas asisten?</label>
+        <select id="rsvpGuests" name="guests" required>
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="1">Solo yo</option>
+          <option value="2">Yo y 1 persona más</option>
+          <option value="3">Yo y 2 personas más</option>
+          <option value="4">Yo y 3 personas más</option>
+          <option value="5">Yo y 4 personas más</option>
+        </select>
       </div>
 
       <div class="field">
@@ -758,12 +759,11 @@
     submitBtn.disabled = true;
 
     var attendingEl = form.querySelector('input[name="attending"]:checked');
-    var guestsEl = form.querySelector('input[name="guests"]:checked');
 
     var data = {
       name: document.getElementById('rsvpName').value.trim(),
       attending: attendingEl ? attendingEl.value : '',
-      guests: guestsEl ? Number(guestsEl.value) : 1,
+      guests: Number(document.getElementById('rsvpGuests').value) || 1,
       attendeeNames: document.getElementById('rsvpAttendeeNames').value.trim(),
       question: document.getElementById('rsvpQuestion').value.trim()
     };
