@@ -108,11 +108,15 @@
     var total = entries.length;
     var si = entries.filter(function(e){ return e.attending === 'si'; });
     var guestCount = si.reduce(function(sum, e){ return sum + (Number(e.guests) || 1); }, 0);
+    var vegCount = si.filter(function(e){ return e.vegetarian === 'si'; }).length;
+    var restrictionCount = si.filter(function(e){ return e.dietaryRestriction === 'si'; }).length;
 
     summary.innerHTML =
       '<div class="stat"><strong>' + total + '</strong><span>Respuestas</span></div>' +
       '<div class="stat"><strong>' + si.length + '</strong><span>Confirmados</span></div>' +
-      '<div class="stat"><strong>' + guestCount + '</strong><span>Personas (sí)</span></div>';
+      '<div class="stat"><strong>' + guestCount + '</strong><span>Personas (sí)</span></div>' +
+      '<div class="stat"><strong>' + vegCount + '</strong><span>Vegetarianos</span></div>' +
+      '<div class="stat"><strong>' + restrictionCount + '</strong><span>Con restricción</span></div>';
 
     if(!entries.length){
       tableWrap.innerHTML = '<p class="empty">Todavía no hay confirmaciones.</p>';
@@ -123,18 +127,26 @@
       var date = e.createdAt ? new Date(e.createdAt).toLocaleString('es-CO', { dateStyle:'medium', timeStyle:'short' }) : '';
       var pillClass = e.attending === 'si' ? 'si' : 'no';
       var pillText = e.attending === 'si' ? 'Sí asiste' : 'No asiste';
+      var vegPill = e.vegetarian === 'si' ? '<span class="pill si">Sí</span>' : '<span class="pill no">No</span>';
+      var restrictionText = e.dietaryRestriction === 'si'
+        ? ('<span class="pill si">Sí</span> ' + escapeHtml(e.dietaryDetails || ''))
+        : '<span class="pill no">No</span>';
       return '<tr>' +
         '<td data-label="Nombre">' + escapeHtml(e.name || '') + '</td>' +
         '<td data-label="Asistencia"><span class="pill ' + pillClass + '">' + pillText + '</span></td>' +
         '<td data-label="Personas">' + escapeHtml(String(e.guests || 1)) + '</td>' +
-        '<td data-label="Mensaje">' + escapeHtml(e.message || '—') + '</td>' +
+        '<td data-label="Asistentes">' + escapeHtml(e.attendeeNames || '—') + '</td>' +
+        '<td data-label="Vegetariano">' + vegPill + '</td>' +
+        '<td data-label="Restricción">' + restrictionText + '</td>' +
+        '<td data-label="Pregunta">' + escapeHtml(e.question || '—') + '</td>' +
+        '<td data-label="Canción">' + escapeHtml(e.song || '—') + '</td>' +
         '<td data-label="Fecha">' + date + '</td>' +
       '</tr>';
     }).join('');
 
     tableWrap.innerHTML =
       '<table><thead><tr>' +
-      '<th>Nombre</th><th>Asistencia</th><th>Personas</th><th>Mensaje</th><th>Fecha</th>' +
+      '<th>Nombre</th><th>Asistencia</th><th>Personas</th><th>Asistentes</th><th>Vegetariano</th><th>Restricción</th><th>Pregunta</th><th>Canción</th><th>Fecha</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table>';
   }
 

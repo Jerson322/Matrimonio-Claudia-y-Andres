@@ -1,5 +1,9 @@
 const { kv } = require('@vercel/kv');
 
+function clean(value, max) {
+  return typeof value === 'string' ? value.slice(0, max) : '';
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'method_not_allowed' });
@@ -8,18 +12,23 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
-    const { name, attending, guests, message } = body;
+    const { name, attending, guests, attendeeNames, vegetarian, dietaryRestriction } = body;
 
-    if (!name || typeof name !== 'string' || !attending) {
+    if (!name || typeof name !== 'string' || !attending || !attendeeNames || !vegetarian || !dietaryRestriction) {
       res.status(400).json({ error: 'missing_fields' });
       return;
     }
 
     const entry = {
-      name: name.slice(0, 200),
+      name: clean(name, 200),
       attending: attending === 'si' ? 'si' : 'no',
-      guests: Math.max(1, Math.min(10, Number(guests) || 1)),
-      message: typeof message === 'string' ? message.slice(0, 500) : '',
+      guests: Math.max(1, Math.min(5, Number(guests) || 1)),
+      attendeeNames: clean(attendeeNames, 500),
+      vegetarian: vegetarian === 'si' ? 'si' : 'no',
+      dietaryRestriction: dietaryRestriction === 'si' ? 'si' : 'no',
+      dietaryDetails: clean(body.dietaryDetails, 300),
+      question: clean(body.question, 500),
+      song: clean(body.song, 200),
       createdAt: new Date().toISOString(),
     };
 

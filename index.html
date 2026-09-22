@@ -284,7 +284,7 @@
   /* ---------- rsvp ---------- */
   .rsvp-card{ background:var(--surface); border:1px solid var(--border); border-radius:26px; padding:clamp(28px,6vw,48px); box-shadow:var(--glow); }
   .field{ display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
-  .field label{ font-size:1.02rem; letter-spacing:.02em; color:var(--text-muted); font-weight:500; }
+  .field > label{ font-size:1.02rem; letter-spacing:.02em; color:var(--text-muted); font-weight:500; }
   .field input, .field select, .field textarea{
     font-family:'Jost', sans-serif; font-size:1.18rem; padding:15px 16px;
     border-radius:12px; border:1px solid var(--border); background:var(--bg); color:var(--text);
@@ -292,6 +292,20 @@
   .field textarea{ resize:vertical; min-height:90px; }
   .row-2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
   @media (max-width:520px){ .row-2{grid-template-columns:1fr;} }
+
+  .radio-group{ display:flex; flex-direction:column; gap:10px; }
+  .radio-option{
+    display:flex; align-items:center; gap:12px;
+    padding:14px 16px; border-radius:14px; border:1.5px solid var(--border);
+    background:var(--bg); cursor:pointer; font-size:1.05rem; line-height:1.4; color:var(--text);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .radio-option input{ accent-color:var(--gold-3); width:20px; height:20px; flex-shrink:0; }
+  .radio-option:has(input:checked){ border-color:var(--gold); background:var(--surface-2); }
+
+  .rsvp-details{ color:var(--text-muted); font-size:1.1rem; line-height:1.9; margin:14px auto 8px; }
+  .rsvp-contact{ color:var(--text-muted); font-size:.98rem; margin-bottom:32px; }
+  .rsvp-contact a{ color:var(--gold-3); text-decoration:underline; }
   #rsvp-status{ margin-top:16px; font-size:1.08rem; }
   #rsvp-status.ok{ color:var(--gold-3); }
   #rsvp-status.err{ color:var(--accent-wine); }
@@ -446,7 +460,7 @@
 <div class="container">
   <p class="eyebrow center">Código de vestimenta</p>
   <h2 class="center shimmer-text" style="margin-block:12px 10px; font-size:clamp(2.1rem,7vw,2.9rem);">Elegante &middot; tonos cálidos</h2>
-  <p class="center" style="max-width:52ch; margin-inline:auto; color:var(--text-muted); font-size:1.18rem;">Como estaremos en la finca al aire libre, te invitamos a lucir elegante y fresco, en colores cálidos.</p>
+  <p class="center" style="max-width:52ch; margin-inline:auto; color:var(--text-muted); font-size:1.18rem;">Como estaremos en la finca al aire libre, te invitamos a lucir elegante y fresco, en colores cálidos. Esto es solo una idea, ¡no es obligatorio vestirte exactamente así! Lo único que sí te pedimos es respetar la paleta de colores.</p>
 
   <div class="palette" aria-hidden="true">
     <span class="swatch" style="background:#C9A34A"></span>
@@ -464,13 +478,13 @@
   <div class="dress-grid">
     <div class="dress-card">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 3c0 1.5 1.3 2.5 3 2.5S15 4.5 15 3M9 3 5 8l2 2 1.5-1.5L7 21h10l-1.5-12.5L17 10l2-2-4-5"/></svg>
-      <h3>Ellas</h3>
-      <p>Vestido largo y fluido, o entallado con estampado, en tonos cálidos como mostaza, terracota, verde oliva o vino. Accesorios naturales (fibra, dorado).</p>
+      <h3>Ellas — solo una idea</h3>
+      <p>Puedes inspirarte en un vestido largo y fluido, o entallado con estampado, en tonos cálidos como mostaza, terracota, verde oliva o vino. Lo importante es el color, no el estilo exacto.</p>
     </div>
     <div class="dress-card">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 3 5 6l1.5 3L8 8v13h8V8l1.5 1L19 6l-3-3-2 2h-4L8 3Z"/></svg>
-      <h3>Ellos</h3>
-      <p>Camisa o guayabera de lino manga corta y pantalón formal, en tonos claros o cálidos. Elegante y fresco, sin corbata.</p>
+      <h3>Ellos — solo una idea</h3>
+      <p>Puedes inspirarte en camisa o guayabera de lino y pantalón formal, en tonos claros o cálidos. Lo importante es el color, no el estilo exacto.</p>
     </div>
   </div>
 </div>
@@ -482,32 +496,72 @@
 <div class="frond corner" style="right:0; top:6px; width:110px; height:110px; transform:scaleX(-1) rotate(-15deg);"></div>
 <div class="container">
   <p class="eyebrow center">Confirmación</p>
-  <h2 class="center shimmer-text" style="margin-block:12px 34px; font-size:clamp(2.1rem,7vw,2.9rem);">¿Nos acompañas?</h2>
+  <h2 class="center shimmer-text" style="margin-block:12px 20px; font-size:clamp(2.1rem,7vw,2.9rem);">Confirmación de asistencia a nuestra boda</h2>
+  <p class="center rsvp-details">Chinauta, Cundinamarca 🧡<br>Finca Oasis Eventos 🏡<br>🧡 19 · 12 · 2026 🧡</p>
+  <p class="center rsvp-contact">Si tienes alguna duda puedes escribirnos a<br><a href="mailto:portesjerson12@gmail.com">portesjerson12@gmail.com</a></p>
 
   <div class="rsvp-card">
     <form id="rsvpForm">
       <div class="field">
-        <label for="rsvpName">Nombre completo</label>
+        <label for="rsvpName">Tu nombre completo</label>
         <input id="rsvpName" name="name" type="text" required autocomplete="name" placeholder="Escribe tu nombre">
       </div>
-      <div class="row-2">
-        <div class="field">
-          <label for="rsvpAttending">¿Asistirás?</label>
-          <select id="rsvpAttending" name="attending" required>
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="si">Sí, ahí estaré</option>
-            <option value="no">No podré asistir</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="rsvpGuests">Número de personas</label>
-          <input id="rsvpGuests" name="guests" type="number" min="1" max="10" value="1" required>
-        </div>
-      </div>
+
       <div class="field">
-        <label for="rsvpMessage">Mensaje o restricción alimentaria (opcional)</label>
-        <textarea id="rsvpMessage" name="message" placeholder="Ej: soy vegetariano, o un mensaje para Claudia y Andrés"></textarea>
+        <label>¿Asistirás a nuestra boda? *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Asistirás a nuestra boda?">
+          <label class="radio-option"><input type="radio" name="attending" value="si" required> Sí asistiré, con mucha emoción 💕</label>
+          <label class="radio-option"><input type="radio" name="attending" value="no"> No, lo siento no puedo acompañarlos 😥</label>
+        </div>
       </div>
+
+      <div class="field">
+        <label>¿Cuántas personas asisten contigo? *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Cuántas personas asisten contigo?">
+          <label class="radio-option"><input type="radio" name="guests" value="1" required> Solo voy yo 🫶🏻</label>
+          <label class="radio-option"><input type="radio" name="guests" value="2"> 2 personas, contando conmigo 😊</label>
+          <label class="radio-option"><input type="radio" name="guests" value="3"> 3 personas, contando conmigo 🫂</label>
+          <label class="radio-option"><input type="radio" name="guests" value="4"> 4 personas, contando conmigo ♥️</label>
+          <label class="radio-option"><input type="radio" name="guests" value="5"> 5 personas, contando conmigo 🧑‍🧑‍🧒‍🧒</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rsvpAttendeeNames">Nombres completos de los asistentes, incluyendo el tuyo *</label>
+        <textarea id="rsvpAttendeeNames" name="attendeeNames" required placeholder="Si solo tienes un cupo, deja solo tu nombre. El número de cupos ya está indicado en tu invitación."></textarea>
+      </div>
+
+      <div class="field">
+        <label>¿Eres vegetariano? 🥗 *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Eres vegetariano?">
+          <label class="radio-option"><input type="radio" name="vegetarian" value="si" required> Sí</label>
+          <label class="radio-option"><input type="radio" name="vegetarian" value="no"> No</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>¿Tienes alguna restricción alimentaria? 🚫 *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Tienes alguna restricción alimentaria?">
+          <label class="radio-option"><input type="radio" name="dietaryRestriction" value="si" required> Sí</label>
+          <label class="radio-option"><input type="radio" name="dietaryRestriction" value="no"> No</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rsvpDietaryDetails">Si tu respuesta anterior fue sí, cuéntanos cuáles (opcional)</label>
+        <textarea id="rsvpDietaryDetails" name="dietaryDetails" placeholder="Ej: alergia a los mariscos"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="rsvpQuestion">¿Tienes alguna pregunta con respecto a la boda? 👰🤵‍♂️💍 (opcional)</label>
+        <textarea id="rsvpQuestion" name="question"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="rsvpSong">¿Qué canción no puede faltar en la boda? 🎶 (opcional)</label>
+        <input id="rsvpSong" name="song" type="text" placeholder="Nombre de la canción">
+      </div>
+
       <button class="btn" id="rsvpSubmit" type="submit">Confirmar asistencia</button>
       <p id="rsvp-status" role="status"></p>
     </form>
@@ -723,11 +777,21 @@
     status.className='';
     submitBtn.disabled = true;
 
+    var attendingEl = form.querySelector('input[name="attending"]:checked');
+    var guestsEl = form.querySelector('input[name="guests"]:checked');
+    var vegetarianEl = form.querySelector('input[name="vegetarian"]:checked');
+    var dietaryRestrictionEl = form.querySelector('input[name="dietaryRestriction"]:checked');
+
     var data = {
       name: document.getElementById('rsvpName').value.trim(),
-      attending: document.getElementById('rsvpAttending').value,
-      guests: Number(document.getElementById('rsvpGuests').value) || 1,
-      message: document.getElementById('rsvpMessage').value.trim()
+      attending: attendingEl ? attendingEl.value : '',
+      guests: guestsEl ? Number(guestsEl.value) : 1,
+      attendeeNames: document.getElementById('rsvpAttendeeNames').value.trim(),
+      vegetarian: vegetarianEl ? vegetarianEl.value : '',
+      dietaryRestriction: dietaryRestrictionEl ? dietaryRestrictionEl.value : '',
+      dietaryDetails: document.getElementById('rsvpDietaryDetails').value.trim(),
+      question: document.getElementById('rsvpQuestion').value.trim(),
+      song: document.getElementById('rsvpSong').value.trim()
     };
 
     fetch('/api/rsvp', {
