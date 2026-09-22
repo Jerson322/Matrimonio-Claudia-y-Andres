@@ -129,13 +129,14 @@
         '<td data-label="Personas">' + escapeHtml(String(e.guests || 1)) + '</td>' +
         '<td data-label="Asistentes">' + escapeHtml(e.attendeeNames || '—') + '</td>' +
         '<td data-label="Pregunta">' + escapeHtml(e.question || '—') + '</td>' +
+        '<td data-label="Canción">' + escapeHtml(e.song || '—') + '</td>' +
         '<td data-label="Fecha">' + date + '</td>' +
       '</tr>';
     }).join('');
 
     tableWrap.innerHTML =
       '<table><thead><tr>' +
-      '<th>Nombre</th><th>Asistencia</th><th>Personas</th><th>Asistentes</th><th>Pregunta</th><th>Fecha</th>' +
+      '<th>Nombre</th><th>Asistencia</th><th>Personas</th><th>Asistentes</th><th>Pregunta</th><th>Canción</th><th>Fecha</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table>';
   }
 

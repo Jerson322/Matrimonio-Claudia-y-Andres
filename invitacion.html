@@ -533,6 +533,11 @@
         <textarea id="rsvpQuestion" name="question"></textarea>
       </div>
 
+      <div class="field">
+        <label for="rsvpSong">¿Qué canción quieres escuchar en la boda? (opcional)</label>
+        <input id="rsvpSong" name="song" type="text" placeholder="Nombre de la canción">
+      </div>
+
       <button class="btn" id="rsvpSubmit" type="submit">Confirmar asistencia</button>
       <p id="rsvp-status" role="status"></p>
     </form>
@@ -763,6 +768,7 @@
       guests: Number(document.getElementById('rsvpGuests').value) || 1,
       attendeeNames: document.getElementById('rsvpAttendeeNames').value.trim(),
       question: document.getElementById('rsvpQuestion').value.trim(),
+      song: document.getElementById('rsvpSong').value.trim(),
       createdAt: new Date().toISOString()
     };
 
