@@ -496,7 +496,7 @@
 <div class="frond corner" style="right:0; top:6px; width:110px; height:110px; transform:scaleX(-1) rotate(-15deg);"></div>
 <div class="container">
   <p class="eyebrow center">Confirmación</p>
-  <h2 class="center shimmer-text" style="margin-block:12px 20px; font-size:clamp(2.1rem,7vw,2.9rem);">Confirmación de asistencia a nuestra boda</h2>
+  <h2 class="center shimmer-text" style="margin-block:12px 20px; font-size:clamp(2.1rem,7vw,2.9rem);">Cuéntanos si nos acompañas</h2>
   <p class="center rsvp-details">Chinauta, Cundinamarca 🧡<br>Finca Oasis Eventos 🏡<br>🧡 19 · 12 · 2026 🧡</p>
   <p class="center rsvp-contact">¿Tienes alguna duda?</p>
   <div style="display:flex; justify-content:center; margin-bottom:32px;">
@@ -511,58 +511,32 @@
       </div>
 
       <div class="field">
-        <label>¿Asistirás a nuestra boda? *</label>
-        <div class="radio-group" role="radiogroup" aria-label="¿Asistirás a nuestra boda?">
-          <label class="radio-option"><input type="radio" name="attending" value="si" required> Sí asistiré, con mucha emoción 💕</label>
-          <label class="radio-option"><input type="radio" name="attending" value="no"> No, lo siento no puedo acompañarlos 😥</label>
+        <label>¿Nos acompañas? *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Nos acompañas?">
+          <label class="radio-option"><input type="radio" name="attending" value="si" required> ¡Sí, no me lo pierdo! 🎉</label>
+          <label class="radio-option"><input type="radio" name="attending" value="no"> No podré estar, los acompaño con el corazón 💛</label>
         </div>
       </div>
 
       <div class="field">
-        <label>¿Cuántas personas asisten contigo? *</label>
-        <div class="radio-group" role="radiogroup" aria-label="¿Cuántas personas asisten contigo?">
-          <label class="radio-option"><input type="radio" name="guests" value="1" required> Solo voy yo 🫶🏻</label>
-          <label class="radio-option"><input type="radio" name="guests" value="2"> 2 personas, contando conmigo 😊</label>
-          <label class="radio-option"><input type="radio" name="guests" value="3"> 3 personas, contando conmigo 🫂</label>
-          <label class="radio-option"><input type="radio" name="guests" value="4"> 4 personas, contando conmigo ♥️</label>
-          <label class="radio-option"><input type="radio" name="guests" value="5"> 5 personas, contando conmigo 🧑‍🧑‍🧒‍🧒</label>
+        <label>¿Cuántos cupos vas a usar? *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Cuántos cupos vas a usar?">
+          <label class="radio-option"><input type="radio" name="guests" value="1" required> Voy solo/a 🙋</label>
+          <label class="radio-option"><input type="radio" name="guests" value="2"> Somos 2 👫</label>
+          <label class="radio-option"><input type="radio" name="guests" value="3"> Somos 3 👨‍👩‍👦</label>
+          <label class="radio-option"><input type="radio" name="guests" value="4"> Somos 4 👨‍👩‍👧‍👦</label>
+          <label class="radio-option"><input type="radio" name="guests" value="5"> Somos 5 👨‍👩‍👧‍👦➕</label>
         </div>
       </div>
 
       <div class="field">
-        <label for="rsvpAttendeeNames">Nombres completos de los asistentes, incluyendo el tuyo *</label>
-        <textarea id="rsvpAttendeeNames" name="attendeeNames" required placeholder="Si solo tienes un cupo, deja solo tu nombre. El número de cupos ya está indicado en tu invitación."></textarea>
+        <label for="rsvpAttendeeNames">Nombre de cada persona que asiste (incluyéndote) *</label>
+        <textarea id="rsvpAttendeeNames" name="attendeeNames" required placeholder="Escribe el nombre completo de cada uno. Recuerda no exceder los cupos que tienes asignados."></textarea>
       </div>
 
       <div class="field">
-        <label>¿Eres vegetariano? 🥗 *</label>
-        <div class="radio-group" role="radiogroup" aria-label="¿Eres vegetariano?">
-          <label class="radio-option"><input type="radio" name="vegetarian" value="si" required> Sí</label>
-          <label class="radio-option"><input type="radio" name="vegetarian" value="no"> No</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>¿Tienes alguna restricción alimentaria? 🚫 *</label>
-        <div class="radio-group" role="radiogroup" aria-label="¿Tienes alguna restricción alimentaria?">
-          <label class="radio-option"><input type="radio" name="dietaryRestriction" value="si" required> Sí</label>
-          <label class="radio-option"><input type="radio" name="dietaryRestriction" value="no"> No</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="rsvpDietaryDetails">Si tu respuesta anterior fue sí, cuéntanos cuáles (opcional)</label>
-        <textarea id="rsvpDietaryDetails" name="dietaryDetails" placeholder="Ej: alergia a los mariscos"></textarea>
-      </div>
-
-      <div class="field">
-        <label for="rsvpQuestion">¿Tienes alguna pregunta con respecto a la boda? 👰🤵‍♂️💍 (opcional)</label>
+        <label for="rsvpQuestion">¿Algo que quieras contarnos o preguntarnos? (opcional)</label>
         <textarea id="rsvpQuestion" name="question"></textarea>
-      </div>
-
-      <div class="field">
-        <label for="rsvpSong">¿Qué canción no puede faltar en la boda? 🎶 (opcional)</label>
-        <input id="rsvpSong" name="song" type="text" placeholder="Nombre de la canción">
       </div>
 
       <button class="btn" id="rsvpSubmit" type="submit">Confirmar asistencia</button>
@@ -782,19 +756,13 @@
 
     var attendingEl = form.querySelector('input[name="attending"]:checked');
     var guestsEl = form.querySelector('input[name="guests"]:checked');
-    var vegetarianEl = form.querySelector('input[name="vegetarian"]:checked');
-    var dietaryRestrictionEl = form.querySelector('input[name="dietaryRestriction"]:checked');
 
     var data = {
       name: document.getElementById('rsvpName').value.trim(),
       attending: attendingEl ? attendingEl.value : '',
       guests: guestsEl ? Number(guestsEl.value) : 1,
       attendeeNames: document.getElementById('rsvpAttendeeNames').value.trim(),
-      vegetarian: vegetarianEl ? vegetarianEl.value : '',
-      dietaryRestriction: dietaryRestrictionEl ? dietaryRestrictionEl.value : '',
-      dietaryDetails: document.getElementById('rsvpDietaryDetails').value.trim(),
-      question: document.getElementById('rsvpQuestion').value.trim(),
-      song: document.getElementById('rsvpSong').value.trim()
+      question: document.getElementById('rsvpQuestion').value.trim()
     };
 
     fetch('/api/rsvp', {

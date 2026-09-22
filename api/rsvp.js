@@ -12,9 +12,9 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
-    const { name, attending, guests, attendeeNames, vegetarian, dietaryRestriction } = body;
+    const { name, attending, guests, attendeeNames } = body;
 
-    if (!name || typeof name !== 'string' || !attending || !attendeeNames || !vegetarian || !dietaryRestriction) {
+    if (!name || typeof name !== 'string' || !attending || !attendeeNames) {
       res.status(400).json({ error: 'missing_fields' });
       return;
     }
@@ -24,11 +24,7 @@ module.exports = async function handler(req, res) {
       attending: attending === 'si' ? 'si' : 'no',
       guests: Math.max(1, Math.min(5, Number(guests) || 1)),
       attendeeNames: clean(attendeeNames, 500),
-      vegetarian: vegetarian === 'si' ? 'si' : 'no',
-      dietaryRestriction: dietaryRestriction === 'si' ? 'si' : 'no',
-      dietaryDetails: clean(body.dietaryDetails, 300),
       question: clean(body.question, 500),
-      song: clean(body.song, 200),
       createdAt: new Date().toISOString(),
     };
 
