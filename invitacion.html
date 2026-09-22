@@ -298,6 +298,8 @@
   .radio-option:has(input:checked){ border-color:var(--gold); background:var(--surface-2); }
 
   .rsvp-details{ color:var(--text-muted); font-size:1.1rem; line-height:1.9; margin:14px auto 8px; }
+  .rsvp-deadline{ color:var(--text); font-size:1.05rem; max-width:48ch; margin:0 auto 22px; background:var(--surface-2); border-radius:14px; padding:14px 18px; }
+  .rsvp-deadline strong{ color:var(--gold-3); }
   .rsvp-contact{ color:var(--text-muted); font-size:.98rem; margin-bottom:32px; }
   .rsvp-contact a{ color:var(--gold-3); text-decoration:underline; }
   #rsvp-status{ margin-top:16px; font-size:1.08rem; }
@@ -490,6 +492,7 @@
   <p class="eyebrow center">Confirmación</p>
   <h2 class="center shimmer-text" style="margin-block:12px 20px; font-size:clamp(2.1rem,7vw,2.9rem);">Cuéntanos si nos acompañas</h2>
   <p class="center rsvp-details">Chinauta, Cundinamarca 🧡<br>Finca Oasis Eventos 🏡<br>🧡 19 · 12 · 2026 🧡</p>
+  <p class="center rsvp-deadline">Por favor confírmanos antes del <strong>30 de noviembre</strong>. Si no tenemos tu respuesta para esa fecha, entenderemos que no podrás acompañarnos.</p>
   <p class="center rsvp-contact">¿Tienes alguna duda?</p>
   <div style="display:flex; justify-content:center; margin-bottom:32px;">
     <a class="btn" href="https://wa.me/573144837849?text=Hola%2C%20tengo%20una%20duda%20sobre%20la%20boda%20de%20Claudia%20y%20Andr%C3%A9s" target="_blank" rel="noopener">📲 Escríbenos por WhatsApp</a>
@@ -503,21 +506,21 @@
       </div>
 
       <div class="field">
-        <label>¿Nos acompañas? *</label>
-        <div class="radio-group" role="radiogroup" aria-label="¿Nos acompañas?">
-          <label class="radio-option"><input type="radio" name="attending" value="si" required> ¡Sí, no me lo pierdo! 🎉</label>
-          <label class="radio-option"><input type="radio" name="attending" value="no"> No podré estar, los acompaño con el corazón 💛</label>
+        <label>¿Asistirás a la boda? *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Asistirás a la boda?">
+          <label class="radio-option"><input type="radio" name="attending" value="si" required> Sí</label>
+          <label class="radio-option"><input type="radio" name="attending" value="no"> No</label>
         </div>
       </div>
 
       <div class="field">
-        <label>¿Cuántos cupos vas a usar? *</label>
-        <div class="radio-group" role="radiogroup" aria-label="¿Cuántos cupos vas a usar?">
-          <label class="radio-option"><input type="radio" name="guests" value="1" required> Voy solo/a 🙋</label>
-          <label class="radio-option"><input type="radio" name="guests" value="2"> Somos 2 👫</label>
-          <label class="radio-option"><input type="radio" name="guests" value="3"> Somos 3 👨‍👩‍👦</label>
-          <label class="radio-option"><input type="radio" name="guests" value="4"> Somos 4 👨‍👩‍👧‍👦</label>
-          <label class="radio-option"><input type="radio" name="guests" value="5"> Somos 5 👨‍👩‍👧‍👦➕</label>
+        <label>¿Cuántas personas asisten? *</label>
+        <div class="radio-group" role="radiogroup" aria-label="¿Cuántas personas asisten?">
+          <label class="radio-option"><input type="radio" name="guests" value="1" required> Solo yo</label>
+          <label class="radio-option"><input type="radio" name="guests" value="2"> Yo y 1 persona más</label>
+          <label class="radio-option"><input type="radio" name="guests" value="3"> Yo y 2 personas más</label>
+          <label class="radio-option"><input type="radio" name="guests" value="4"> Yo y 3 personas más</label>
+          <label class="radio-option"><input type="radio" name="guests" value="5"> Yo y 4 personas más</label>
         </div>
       </div>
 
