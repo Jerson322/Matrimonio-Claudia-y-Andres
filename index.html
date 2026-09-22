@@ -303,11 +303,13 @@
   .radio-option input{ accent-color:var(--gold-3); width:20px; height:20px; flex-shrink:0; }
   .radio-option:has(input:checked){ border-color:var(--gold); background:var(--surface-2); }
 
-  .rsvp-details{ color:var(--text-muted); font-size:1.1rem; line-height:1.9; margin:14px auto 8px; }
+  .rsvp-intro{ margin-bottom:4px; }
+  .rsvp-details{ color:var(--text-muted); font-size:1.1rem; line-height:1.9; margin:14px auto 20px; }
   .rsvp-deadline{ color:var(--text); font-size:1.05rem; max-width:48ch; margin:0 auto 22px; background:var(--surface-2); border-radius:14px; padding:14px 18px; }
   .rsvp-deadline strong{ color:var(--gold-3); }
-  .rsvp-contact{ color:var(--text-muted); font-size:.98rem; margin-bottom:32px; }
+  .rsvp-contact{ color:var(--text-muted); font-size:.98rem; margin-bottom:16px; }
   .rsvp-contact a{ color:var(--gold-3); text-decoration:underline; }
+  .rsvp-whatsapp{ display:flex; justify-content:center; }
   #rsvp-status{ margin-top:16px; font-size:1.08rem; }
   #rsvp-status.ok{ color:var(--gold-3); }
   #rsvp-status.err{ color:var(--accent-wine); }
@@ -497,16 +499,19 @@
 <div class="frond corner" style="left:0; top:6px; width:110px; height:110px; transform:rotate(-15deg);"></div>
 <div class="frond corner" style="right:0; top:6px; width:110px; height:110px; transform:scaleX(-1) rotate(-15deg);"></div>
 <div class="container">
-  <p class="eyebrow center">Confirmación</p>
-  <h2 class="center shimmer-text" style="margin-block:12px 20px; font-size:clamp(2.1rem,7vw,2.9rem);">Cuéntanos si nos acompañas</h2>
-  <p class="center rsvp-details">Chinauta, Cundinamarca 🧡<br>Finca Oasis Eventos 🏡<br>🧡 19 · 12 · 2026 🧡</p>
-  <p class="center rsvp-deadline">Por favor confírmanos antes del <strong>30 de noviembre</strong>. Si no tenemos tu respuesta para esa fecha, entenderemos que no podrás acompañarnos.</p>
-  <p class="center rsvp-contact">¿Tienes alguna duda?</p>
-  <div style="display:flex; justify-content:center; margin-bottom:32px;">
-    <a class="btn" href="https://wa.me/573144837849?text=Hola%2C%20tengo%20una%20duda%20sobre%20la%20boda%20de%20Claudia%20y%20Andr%C3%A9s" target="_blank" rel="noopener">📲 Escríbenos por WhatsApp</a>
-  </div>
-
   <div class="rsvp-card">
+    <div class="rsvp-intro">
+      <p class="eyebrow center">Confirmación</p>
+      <h2 class="center shimmer-text" style="margin-block:12px 20px; font-size:clamp(1.9rem,6.5vw,2.6rem);">Cuéntanos si nos acompañas</h2>
+      <p class="center rsvp-details">Chinauta, Cundinamarca 🧡<br>Finca Oasis Eventos 🏡<br>🧡 19 · 12 · 2026 🧡</p>
+      <p class="center rsvp-deadline">Por favor confírmanos antes del <strong>30 de noviembre</strong>. Si no tenemos tu respuesta para esa fecha, entenderemos que no podrás acompañarnos.</p>
+      <p class="center rsvp-contact">¿Tienes alguna duda?</p>
+      <div class="rsvp-whatsapp">
+        <a class="btn" href="https://wa.me/573144837849?text=Hola%2C%20tengo%20una%20duda%20sobre%20la%20boda%20de%20Claudia%20y%20Andr%C3%A9s" target="_blank" rel="noopener">📲 Escríbenos por WhatsApp</a>
+      </div>
+    </div>
+    <div class="divider center"></div>
+
     <form id="rsvpForm">
       <div class="field">
         <label for="rsvpName">Tu nombre completo o nombre de la familia</label>
