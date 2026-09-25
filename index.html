@@ -220,6 +220,7 @@
 
   /* ---------- cards ---------- */
   .card-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+  .itinerary-grid{ grid-template-columns:1fr; max-width:520px; margin-inline:auto; }
   .card{
     position:relative; overflow:hidden;
     background:var(--surface); border:1px solid var(--border); border-radius:22px;
@@ -405,27 +406,30 @@
 <div class="container">
   <p class="eyebrow center">Itinerario</p>
   <h2 class="center shimmer-text" style="margin-block:12px 38px; font-size:clamp(2.1rem,7vw,2.9rem);">¿Cuándo y dónde?</h2>
-  <div class="card-grid">
+  <div class="card-grid itinerary-grid">
     <div class="card">
       <span class="icon">☀️</span>
-      <span class="time">8:00 a. m.</span>
-      <h3>Llegada anticipada</h3>
-      <p>Finca Oasis Eventos<br>Chinauta, Cundinamarca</p>
-      <p class="note">Si quieres disfrutar el lugar desde temprano, puedes llegar desde las 8:00 a. m., y arreglarte ahí mismo antes de ir a la misa.</p>
+      <span class="time">Desde las 8:00 a. m.</span>
+      <h3>Llegada y hospedaje</h3>
+      <p>La finca abre desde temprano: llega a disfrutar el lugar, arréglate allí antes de la misa, o haz el check-in si te vas a quedar a dormir.</p>
     </div>
     <div class="card">
       <span class="icon">⛪</span>
       <span class="time">6:00 p. m.</span>
       <h3>Ceremonia religiosa</h3>
-      <p>Parroquia del Niño Jesús de Chinauta<br>Chinauta, Cundinamarca</p>
-      <p class="note">Los esperamos para celebrar juntos este sacramento.</p>
+      <p>En la Parroquia del Niño Jesús de Chinauta.</p>
     </div>
     <div class="card">
       <span class="icon">🥂</span>
       <span class="time">7:00 p. m.</span>
       <h3>Recepción</h3>
-      <p>Finca Oasis Eventos<br>Chinauta, Cundinamarca</p>
-      <p class="note">Al terminar la misa nos dirigiremos todos juntos a la finca. Si prefieres no asistir a la ceremonia, ¡las puertas estarán abiertas desde las 7:00 p. m. para recibirte con la fiesta!</p>
+      <p>En la finca, todos juntos después de la misa. Si no asistes a la ceremonia, las puertas se abren desde esta hora.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🛏️</span>
+      <span class="time">Hasta el domingo 20</span>
+      <h3>Estadía</h3>
+      <p>Para quienes confirmen que se quedan a dormir. ¡No te preocupes por la hora de salida!</p>
     </div>
   </div>
 </div>
