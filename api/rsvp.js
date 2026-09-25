@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
     const entry = {
       name: clean(name, 200),
       attending: attending === 'si' ? 'si' : 'no',
-      guests: Math.max(1, Math.min(5, Number(guests) || 1)),
+      guests: Math.max(1, Math.min(4, Number(guests) || 1)),
       attendeeNames: clean(attendeeNames, 500),
       question: clean(body.question, 500),
       song: clean(body.song, 500),
